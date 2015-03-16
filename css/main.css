@@ -76,11 +76,12 @@ a.read_more:hover, .work_teaser a:hover{
 	position:absolute;
 	top:-1px;
 	right:0;
+	height:30px;
 }
 
 .topic .header h2::before {
     content: '';
-    height: 29px;
+    height: 30px;
     width: 7px;
     position: absolute;
     top:0;
@@ -237,6 +238,7 @@ p.top_text,.work_item .content, .topic .content{
 	background-color:#FFCC00;
 	width:100%;
 	color:#333;
+	height:50px;
 }
 
 .work h3 em{
@@ -247,7 +249,7 @@ p.top_text,.work_item .content, .topic .content{
 .work_item h3::before{
 	background-color:#FFCC00;
 	content: '';
-    height: 51px;
+    height: 50px;
     width: 12px;
     position: absolute;
     top:0;
