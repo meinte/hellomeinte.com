@@ -81,7 +81,7 @@ a.read_more:hover, .work_teaser a:hover{
 .topic .header h2::before {
     content: '';
     height: 30px;
-    width: 5px;
+    width: 7px;
     position: absolute;
     top:0;
     left:0;
@@ -248,7 +248,7 @@ p.top_text,.work_item .content, .topic .content{
 	background-color:#FFCC00;
 	content: '';
     height: 51px;
-    width: 10px;
+    width: 12px;
     position: absolute;
     top:0;
     left:0;
@@ -345,9 +345,17 @@ p.ending a{
 	}
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
+	.work_item h3::before{
+		display:none;
+	}
+
 	#main{
 		width:100%;
 		padding:0 5px 0 5px;
+	}
+
+	.source_name{
+		display:none;
 	}
 }
