@@ -80,7 +80,7 @@ a.read_more:hover, .work_teaser a:hover{
 
 .topic .header h2::before {
     content: '';
-    height: 30px;
+    height: 29px;
     width: 7px;
     position: absolute;
     top:0;
