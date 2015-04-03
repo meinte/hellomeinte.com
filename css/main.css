@@ -248,6 +248,9 @@ p.top_text,.work_item .content, .topic .content{
 	width:100%;
 	color:#333;
 	height:50px;
+	
+	overflow: hidden;
+    white-space: nowrap;
 }
 
 .work h3 em{
@@ -302,6 +305,7 @@ p.top_text,.work_item .content, .topic .content{
 	font-size:15px;
 	color:#999;
 	margin-top:8px;
+	width:88%;
 }
 
 .work_item .teaser{
@@ -378,5 +382,11 @@ p.ending a{
 
 	.source_name{
 		display:none;
+	}
+}
+
+@media (max-width: 350px) {
+	.work_item h3{
+		font-size:22px;
 	}
 }
