@@ -1,0 +1,35 @@
+{
+  "name": "hellomeinte.com",
+  "version": "1.0.0",
+  "description": "hellomeinte.com front facing website",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/hellomeinte/hellomeinte.com.git"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "hellomeinte"
+  ],
+  "author": "Meinte vant Kruis <meinte@info.nl> (http://www.info.nl/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/hellomeinte/hellomeinte.com/issues"
+  },
+  "homepage": "https://gitlab.com/hellomeinte/hellomeinte.com#readme",
+  "dependencies": {
+    "@tryghost/content-api": "^1.2.4",
+    "debug": "^4.1.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-hbs": "^2.1.2",
+    "handlebars": "^4.1.2"
+  }
+}

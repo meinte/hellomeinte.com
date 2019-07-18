@@ -1,0 +1,62 @@
+<div id='main'>
+	<img src='img/logo.png' alt='HelloMeinte logo' />
+	{{{intro1.html}}}
+	<div class='topic contact'>
+		<div class='header'>
+			<h2>Contact</h2>
+		</div>
+		<div class='top_text'>{{{contact_intro.html}}}</div>
+		<div class='contact_details'>
+			<div>
+				<p class='contact_detail_header'>Email</p>
+				<p class='contact_detail_value'><a href='mailto:meinte@gmail.com'>meinte@gmail.com</a></p>
+			</div>
+			<div>
+				<p class='contact_detail_header'>Phone</p>
+				<p class='contact_detail_value'><a href="tel:0061457283421">0061 457283421</a></p>
+			</div>
+			<div class='last'>
+				<p class='contact_detail_header'>Skype</p>
+				<p class='contact_detail_value'><a href="skype:meinte.vant.kruis?call">meinte.vant.kruis</a></p>
+			</div>
+		</div>
+	</div>
+	<div class='topic work'>
+		<div class='header'>
+			<h2>Work</h2>
+		</div>
+		<div class='top_text'>
+			{{{work_intro.html}}}
+		</div>
+		{{#each clients}}
+		<div class='work_item'>
+			<h3>{{{clientTitleEmphasize this.title}}}</h3>
+			<div class='teaser'>
+				<h4>{{this.custom_excerpt}}</h4>
+				<p class='roles'>{{{clientTags this.tags}}}</p>
+				<a href='#' class='read_more' data-ui='read_more'>+</a>
+			</div>
+			<div class='content' data-ui='more_content'>
+				<img src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+				{{{this.html}}}
+				<a href='#' class='read_less' data-ui='read_less'>-</a>
+			</div>
+		</div>
+		{{/each}}
+		<div class='work_teaser'>
+			{{{other_work.html}}}
+		</div>
+	</div>
+	<div class='topic about'>
+		<div class='header'>
+			<h2>About</h2>
+		</div>
+		<div class='content'>
+			{{{about.html}}}
+		</div>
+		<p class='ending'>Want to know more?</p>
+		<p class='ending'>Perhaps I started my <a href='https://blog.hellomeinte.com/' target='_blank'>blog</a>. And you
+			can
+			always visit my <a href='https://au.linkedin.com/in/meinte' target='_blank'>LinkedIn profile</a>.</p>
+	</div>
+</div>
