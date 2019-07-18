@@ -17,12 +17,4 @@
   .ending {
     display: none;
   }
-
-  .hidden {
-    display: block;
-  }
-
-  .work_item {
-    page-break-before: always;
-  }
 }
