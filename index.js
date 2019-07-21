@@ -16,12 +16,17 @@ handleBars.registerHelper("clientTitleEmphasize", clientTitle => {
   const split = clientTitle.split(" ");
   return `${split[0]}<em>${split[1]}</em>`;
 });
+handleBars.registerHelper("timelineTitleEmphasize", clientTitle => {
+  const year = clientTitle.split("Timeline ")[1];
+  const splitYear = year.split("20");
+  return `20<em>${splitYear[1]}</em>`;
+});
 
-handleBars.registerHelper("clientTags", tags =>
+handleBars.registerHelper("tagList", (tags, delimiter) =>
   tags
     .filter(tag => tag.visibility === "public")
     .map(tag => tag.name)
-    .join(" | ")
+    .join(delimiter)
 );
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
@@ -34,16 +39,23 @@ const api = new GhostContentAPI({
   version: "v2"
 });
 
-//Maps ghost title to handlebars IDs
+//Maps ghost page titles to handlebars IDs
+//Pages not listed here will not be shown on the website
 const WEBSITE_CONTENT_IDS = {
+  main_intro: "main_intro",
   intro1: "intro1",
   contact_intro: "contact_intro",
   work_intro: "work_intro",
+  timeline_intro: "timeline_intro",
   "client: QGC": "qgc",
   "client: Macquarie University": "macquarie",
   "client: Deloitte": "deloitte",
   other_work: "other_work",
-  about: "about"
+  about: "about",
+  "Timeline 2019": "t2019",
+  "Timeline 2018": "t2018",
+  "Timeline 2017": "t2017",
+  "Timeline 2016": "t2016"
 };
 
 const filterOnGhostTitle = (pages, title) =>
@@ -61,7 +73,7 @@ const grabGhostContent = () => {
     .then(pages => {
       debug(pages);
       /**
-       * Search content through their titles.
+       * Search content through their page titles.
        * In this case, titles are stored in the WEBSITE_CONTENT_IDS array.
        * Content is then mapped(reduced) in an object through its title
        */
@@ -78,22 +90,30 @@ const grabGhostContent = () => {
     });
 };
 
+const bundleContent = (content, withTitle) =>
+  Object.keys(content).reduce((acc, itemKey) => {
+    const item = content[itemKey];
+    const arr = [...acc];
+    if (!item.title) return arr;
+    if (item.title.indexOf(withTitle) > -1) {
+      arr.push(item);
+      delete content[itemKey];
+    }
+    return arr;
+  }, []);
+
 app.get("/", function(req, res) {
+  const start = new Date();
+
   grabGhostContent()
     .then(content => {
-      content.clients = Object.keys(content).reduce((acc, itemKey) => {
-        const item = content[itemKey];
-        const arr = [...acc];
-        if (item.title.indexOf("client") > -1) {
-          arr.push(item);
-          delete content[itemKey];
-        }
-        return arr;
-      }, []);
+      content.clients = bundleContent(content, "client");
+      content.timelines = bundleContent(content, "Timeline");
       return content;
     })
     .then(content => {
       debug("mapped content: ", content);
+      debug("request duration ", new Date() - start);
       res.render("home", content);
     })
     .catch(err => {

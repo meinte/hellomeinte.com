@@ -1,7 +1,7 @@
 html {
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: #262626;
   font-family: "Abel", sans-serif;
   font-size: 18px;
   color: white;
@@ -13,12 +13,33 @@ body {
   padding-top: 20px;
 }
 
+.introduction {
+  margin-bottom: 15px;
+}
+.introduction h1,
+.introduction p {
+  background-color: white;
+  padding: 12px;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 23px;
+  color: #666;
+}
+
+.introduction em {
+  background-color: #ccc;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
+  height: 30px;
+}
+
 em {
   font-style: normal;
 }
 
 a {
-  background-color: #333;
   color: cyan;
   text-decoration: none;
   padding: 2px 8px;
@@ -58,11 +79,13 @@ a.read_more:hover,
   display: none;
 }
 
+.timeline .header h2,
 .about .header h2 {
   color: #333;
   background-color: #00ffff;
 }
 
+.timeline .header h2::before,
 .about .header h2::before {
   background-color: #00ffff;
 }
@@ -97,24 +120,6 @@ a.read_more:hover,
   margin: 7px 10px;
 }
 
-h1 {
-  background-color: white;
-  padding: 12px;
-  text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  font-size: 23px;
-  color: #666;
-}
-
-h1 em {
-  background-color: #ccc;
-  padding-left: 5px;
-  padding-right: 5px;
-  display: inline-block;
-  height: 30px;
-}
-
 h3 {
   font-size: 24px;
 }
@@ -126,7 +131,7 @@ h3 {
   margin-right: auto;
 }
 
-#main > div {
+#main > article {
   margin-top: 25px;
 }
 
@@ -138,10 +143,6 @@ h3 {
   position: relative;
 }
 
-p em {
-  display: block;
-}
-
 .work_item .content {
   border: solid #4e4e4e 1px;
   color: white;
@@ -149,7 +150,6 @@ p em {
 
 .topic .header h2 {
   text-align: center;
-  text-transform: uppercase;
 }
 
 .contact .header {
@@ -285,6 +285,7 @@ p em {
 .work_item .teaser h4 {
   color: #666;
 }
+
 .work_teaser {
   margin-top: 20px;
   width: 95%;
@@ -313,8 +314,82 @@ p em {
 .about .content {
   margin-bottom: 15px;
 }
+.timeline .header,
 .about .header {
-  border-color: #00ffff;
+  border-color: #0ff;
+}
+
+.timeline_content {
+  position: relative;
+}
+
+.timeline_item {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.timeline section:first-of-type {
+  margin-top: 30px;
+}
+
+.timeline_content::after,
+.timeline_content::before {
+  position: absolute;
+  text-align: center;
+  top: -13px;
+  left: -6px;
+  content: "DEC";
+  font-size: 8px;
+  color: #424242;
+}
+
+.timeline_content::after {
+  content: "JAN";
+  top: initial;
+  bottom: -13px;
+}
+
+.timeline_item h3 {
+  padding: 10px;
+  align-self: center;
+  color: #0ff;
+  font-size: 10px;
+}
+
+.timeline_item h3 em {
+  font-size: 14px;
+}
+
+.timeline_item p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.timeline_item p::first-letter {
+  font-weight: bolder;
+}
+
+.timeline_item p:last-of-type {
+  margin-bottom: 0;
+}
+
+.timeline_content {
+  padding: 10px 15px;
+  /*border-left: 1px dotted #0ff;*/
+  background-image: linear-gradient(#0ff 33%, rgba(255, 255, 255, 0) 0%);
+  background-position: left;
+  background-size: 1px 5px;
+  background-repeat: repeat-y;
+}
+
+.timeline_content em {
+  color: #0ff;
+  font-size: 11px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  margin-top: 10px;
+  display: block;
 }
 
 .ending:first-of-type {

@@ -4,6 +4,8 @@ function init() {
   var read_lessButtons = T.gats(mainElement, "data-ui", "read_less") || [];
   var moreContent = T.gats(mainElement, "data-ui", "more_content") || [];
 
+  //load images after page load
+
   (function hideWorkContent() {
     for (var i = 0; i < moreContent.length; i++) {
       T.adcl(moreContent[i], "hidden");
@@ -32,8 +34,13 @@ function init() {
 
   function readmore_clickHandler(e) {
     var contentIndex = read_moreButtons.indexOf(this);
+    const contentElement = moreContent[contentIndex];
+    const img = contentElement.getElementsByTagName("img")[0];
+    if (img && img.hasAttribute("data-src")) {
+      img.src = img.getAttribute("data-src");
+    }
     T.adcl(this, "hidden");
-    T.rmcl(moreContent[contentIndex], "hidden");
+    T.rmcl(contentElement, "hidden");
     e.preventDefault();
   }
 }
