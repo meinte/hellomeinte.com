@@ -1,11 +1,9 @@
 function init() {
-  var mainElement = T.gid("main");
-  var read_moreButtons = T.gats(mainElement, "data-ui", "read_more") || [];
-  var read_lessButtons = T.gats(mainElement, "data-ui", "read_less") || [];
-  var moreContent = T.gats(mainElement, "data-ui", "more_content") || [];
-
-  //load images after page load
-
+  const mainElement = document.getElementsByTagName("main")[0];
+  const read_moreButtons = T.gats(mainElement, "data-ui", "read_more") || [];
+  const read_lessButtons = T.gats(mainElement, "data-ui", "read_less") || [];
+  const moreContent = T.gats(mainElement, "data-ui", "more_content") || [];
+  const allAnchors = document.getElementsByTagName("a");
   (function hideWorkContent() {
     for (var i = 0; i < moreContent.length; i++) {
       T.adcl(moreContent[i], "hidden");
@@ -25,22 +23,48 @@ function init() {
     }
   })();
 
+  (function anchorClickedBehaviour() {
+    var i = 0;
+    for (i = 0; i < allAnchors.length; i++) {
+      const anchor = allAnchors[i];
+      const href = anchor.href || "";
+      if (href.indexOf("#") > -1) {
+        const target = T.gid(href.split("#")[1]);
+        if (target) {
+          const contentElem = T.gcl(target, "content");
+          anchor.addEventListener("click", () => showWorkContent(contentElem));
+        }
+      }
+    }
+  })();
+
   function readless_clickHandler(e) {
-    var contentIndex = read_lessButtons.indexOf(this);
+    const contentIndex = read_lessButtons.indexOf(this);
     T.adcl(moreContent[contentIndex], "hidden");
     T.rmcl(read_moreButtons[contentIndex], "hidden");
     e.preventDefault();
   }
 
   function readmore_clickHandler(e) {
-    var contentIndex = read_moreButtons.indexOf(this);
-    const contentElement = moreContent[contentIndex];
+    const contentElement = moreContent[read_moreButtons.indexOf(this)];
+    showWorkContent(contentElement);
+    e.preventDefault();
+  }
+
+  function showWorkContent(contentElement) {
+    const contentIndex = moreContent.indexOf(contentElement);
     const img = contentElement.getElementsByTagName("img")[0];
+    const moreButton = read_moreButtons[contentIndex];
+    //load image when content is displayed
     if (img && img.hasAttribute("data-src")) {
       img.src = img.getAttribute("data-src");
     }
-    T.adcl(this, "hidden");
+    if (moreButton) {
+      T.adcl(moreButton, "hidden");
+    }
+
     T.rmcl(contentElement, "hidden");
-    e.preventDefault();
   }
+
+  function hideWorkContent() {}
 }

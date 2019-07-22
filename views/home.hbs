@@ -1,4 +1,4 @@
-<div id='main'>
+<main>
 	<img src='img/logo.png' alt='HelloMeinte logo' />
 	<section class='introduction'>
 		{{{intro1.html}}}
@@ -36,7 +36,7 @@
 			<h3>{{{timelineTitleEmphasize this.title}}}</h3>
 			<div class='timeline_content'>
 				{{{this.html}}}
-				<em>{{{tagList this.tags ", "}}}</em>
+				<em>Keywords: {{{tagList this.tags ", "}}}</em>
 			</div>
 		</section>
 		{{/each}}
@@ -49,18 +49,20 @@
 			{{{work_intro.html}}}
 		</div>
 		{{#each clients}}
-		<section class='work_item'>
+		<section class='work_item' id='{{this.title}}'>
 			<h3>{{{clientTitleEmphasize this.title}}}</h3>
 			<div class='teaser'>
 				<h4>{{this.custom_excerpt}}</h4>
 				<p class='roles'>{{{tagList this.tags " | "}}}</p>
-				<a href='#' class='read_more' data-ui='read_more'>+</a>
+				<button class='read_more' data-ui='read_more'>+</a>
 			</div>
 			<div class='content' data-ui='more_content'>
-				<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-					data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+				<div class='img_container'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+						data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+				</div>
 				{{{this.html}}}
-				<a href='#' class='read_less' data-ui='read_less'>-</a>
+				<button class='read_less' data-ui='read_less'>-</a>
 			</div>
 		</section>
 		{{/each}}
@@ -80,4 +82,4 @@
 			can
 			always visit my <a href='https://au.linkedin.com/in/meinte' target='_blank'>LinkedIn profile</a>.</p>
 	</article>
-</div>
+</main>

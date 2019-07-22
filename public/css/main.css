@@ -64,22 +64,31 @@ em {
 a {
   color: cyan;
   text-decoration: none;
-  padding: 2px 8px;
-  line-height: 30px;
 }
 
 a:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.work a {
+  padding: 2px 8px;
+  line-height: 30px;
+  text-decoration: none;
+}
+
+.work a:hover {
   background-color: cyan;
   color: #333;
 }
 
-a.read_more,
+.read_more,
 .work_teaser a {
   background-color: cyan;
   color: #333;
 }
 
-a.read_more:hover,
+.read_more:hover,
 .work_teaser a:hover {
   background-color: #333;
   color: cyan;
@@ -146,14 +155,14 @@ h3 {
   font-size: 24px;
 }
 
-#main {
+main {
   display: block;
   width: 450px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#main > article {
+main > article {
   margin-top: 25px;
 }
 
@@ -286,6 +295,11 @@ h3 {
   margin-bottom: initial;
 }
 
+.work_item .img_container {
+  height: 300px;
+  overflow: hidden;
+}
+
 .content img {
   width: 100%;
 }
@@ -402,7 +416,6 @@ h3 {
 
 .timeline_content {
   padding: 10px 15px;
-  /*border-left: 1px dotted #0ff;*/
   background-image: linear-gradient(#0ff 33%, rgba(255, 255, 255, 0) 0%);
   background-position: left;
   background-size: 1px 5px;
@@ -445,7 +458,7 @@ p.ending a {
     display: none;
   }
 
-  #main {
+  main {
     width: 100%;
     padding: 0 10px 0 10px;
   }
