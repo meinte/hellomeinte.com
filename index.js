@@ -13,8 +13,8 @@ const port = process.env.PORT;
 debug("starting..");
 
 handleBars.registerHelper("clientTitleEmphasize", clientTitle => {
-  const split = clientTitle.split(" ");
-  return `${split[0]}<em>${split[1]}</em>`;
+  const split = clientTitle.split(":");
+  return `${split[0]}: <em>${split[1]}</em>`;
 });
 handleBars.registerHelper("timelineTitleEmphasize", clientTitle => {
   const year = clientTitle.split("Timeline ")[1];
@@ -47,10 +47,10 @@ const WEBSITE_CONTENT_IDS = {
   contact_intro: "contact_intro",
   work_intro: "work_intro",
   timeline_intro: "timeline_intro",
-  "client: Greenwheels": "greenwheels",
-  "client: QGC": "qgc",
-  "client: Macquarie University": "macquarie",
-  "client: Deloitte": "deloitte",
+  "client:Greenwheels": "greenwheels",
+  "client:QGC": "qgc",
+  "client:Macquarie": "macquarie",
+  "client:Deloitte": "deloitte",
   other_work: "other_work",
   about: "about",
   "Timeline 2019": "t2019",

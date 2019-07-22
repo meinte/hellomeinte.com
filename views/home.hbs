@@ -4,12 +4,12 @@
 		{{{intro1.html}}}
 	</section>
 	<div class='top_text'>{{{main_intro.html}}}</div>
-	<article class='topic contact'>
-		<div class='header'>
+	<section class='topic contact'>
+		<header>
 			<h2>Contact</h2>
-		</div>
+		</header>
 		<div class='top_text'>{{{contact_intro.html}}}</div>
-		<section class='contact_details'>
+		<div class='contact_details'>
 			<div>
 				<p class='contact_detail_header'>Email</p>
 				<p class='contact_detail_value'><a href='mailto:meinte@gmail.com'>meinte@gmail.com</a></p>
@@ -22,12 +22,12 @@
 				<p class='contact_detail_header'>Skype</p>
 				<p class='contact_detail_value'><a href="skype:meinte.vant.kruis?call">meinte.vant.kruis</a></p>
 			</div>
-		</section>
-	</article>
-	<article class='topic timeline'>
-		<div class='header'>
-			<h2>Timeline</h2>
 		</div>
+	</section>
+	<article class='topic timeline'>
+		<header>
+			<h2>Timeline</h2>
+		</header>
 		<div class='top_text'>
 			{{{timeline_intro.html}}}
 		</div>
@@ -42,9 +42,9 @@
 		{{/each}}
 	</article>
 	<article class='topic work'>
-		<div class='header'>
+		<header>
 			<h2>Projects</h2>
-		</div>
+		</header>
 		<div class='top_text'>
 			{{{work_intro.html}}}
 		</div>
@@ -54,7 +54,7 @@
 			<div class='teaser'>
 				<h4>{{this.custom_excerpt}}</h4>
 				<p class='roles'>{{{tagList this.tags " | "}}}</p>
-				<button class='read_more' data-ui='read_more'>+</a>
+				<button class='read_more' data-ui='read_more'>+</button>
 			</div>
 			<div class='content' data-ui='more_content'>
 				<div class='img_container'>
@@ -62,7 +62,7 @@
 						data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
 				</div>
 				{{{this.html}}}
-				<button class='read_less' data-ui='read_less'>-</a>
+				<button class='read_less' data-ui='read_less'>-</button>
 			</div>
 		</section>
 		{{/each}}
@@ -71,12 +71,12 @@
 		</div>
 	</article>
 	<article class='topic about'>
-		<div class='header'>
+		<header>
 			<h2>About</h2>
-		</div>
-		<section class='content'>
+		</header>
+		<div class='content'>
 			{{{about.html}}}
-		</section>
+		</div>
 		<p class='ending'>Want to know more?</p>
 		<p class='ending'>Perhaps I started my <a href='https://blog.hellomeinte.com/' target='_blank'>blog</a>. And you
 			can
