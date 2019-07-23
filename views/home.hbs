@@ -1,10 +1,13 @@
-<div id='main'>
+<main>
 	<img src='img/logo.png' alt='HelloMeinte logo' />
-	{{{intro1.html}}}
-	<div class='topic contact'>
-		<div class='header'>
+	<section class='introduction'>
+		{{{intro1.html}}}
+	</section>
+	<div class='top_text'>{{{main_intro.html}}}</div>
+	<section class='topic contact'>
+		<header>
 			<h2>Contact</h2>
-		</div>
+		</header>
 		<div class='top_text'>{{{contact_intro.html}}}</div>
 		<div class='contact_details'>
 			<div>
@@ -20,37 +23,58 @@
 				<p class='contact_detail_value'><a href="skype:meinte.vant.kruis?call">meinte.vant.kruis</a></p>
 			</div>
 		</div>
-	</div>
-	<div class='topic work'>
-		<div class='header'>
-			<h2>Work</h2>
+	</section>
+	<article id='timelines' class='topic timeline' data-num-timelines={{timelines.length}}>
+		<header>
+			<h2>Timeline</h2>
+		</header>
+		<div class='top_text'>
+			{{{timeline_intro.html}}}
 		</div>
+		{{#each timelines}}
+		<section class='timeline_item' id='timeline_{{@key}}'>
+			<h3>{{{timelineTitleEmphasize this.title}}}</h3>
+			<div class='timeline_content'>
+				{{{this.html}}}
+				<em>This year's keywords: {{{tagList this.tags ", "}}}</em>
+			</div>
+		</section>
+		{{/each}}
+		<button class='simple_more_btn' data-ui="show_all_timelines">Show all years</button>
+	</article>
+	<article class='topic work'>
+		<header>
+			<h2>Projects</h2>
+		</header>
 		<div class='top_text'>
 			{{{work_intro.html}}}
 		</div>
 		{{#each clients}}
-		<div class='work_item'>
+		<section class='work_item' id='{{this.slug}}'>
 			<h3>{{{clientTitleEmphasize this.title}}}</h3>
 			<div class='teaser'>
 				<h4>{{this.custom_excerpt}}</h4>
-				<p class='roles'>{{{clientTags this.tags}}}</p>
-				<a href='#' class='read_more' data-ui='read_more'>+</a>
+				<p class='roles'>{{{tagList this.tags " | "}}}</p>
+				<button class='read_more' data-ui='read_more'>+</button>
 			</div>
 			<div class='content' data-ui='more_content'>
-				<img src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+				<div class='img_container'>
+					<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+						data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+				</div>
 				{{{this.html}}}
-				<a href='#' class='read_less' data-ui='read_less'>-</a>
+				<button class='read_less' data-ui='read_less'>-</button>
 			</div>
-		</div>
+		</section>
 		{{/each}}
-		<div class='work_teaser'>
+		<div class='other_work'>
 			{{{other_work.html}}}
 		</div>
-	</div>
-	<div class='topic about'>
-		<div class='header'>
+	</article>
+	<article class='topic about'>
+		<header>
 			<h2>About</h2>
-		</div>
+		</header>
 		<div class='content'>
 			{{{about.html}}}
 		</div>
@@ -58,5 +82,5 @@
 		<p class='ending'>Perhaps I started my <a href='https://blog.hellomeinte.com/' target='_blank'>blog</a>. And you
 			can
 			always visit my <a href='https://au.linkedin.com/in/meinte' target='_blank'>LinkedIn profile</a>.</p>
-	</div>
-</div>
+	</article>
+</main>
