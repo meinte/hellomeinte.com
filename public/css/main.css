@@ -19,6 +19,16 @@
     url("../fonts/open-sans-v16-latin-300.woff2") format("woff2"),
     url("../fonts/open-sans-v16-latin-300.woff") format("woff");
 }
+
+@keyframes throbber {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -36,6 +46,33 @@ body {
 
 button {
   font-size: 18px;
+}
+
+.simple_more_btn {
+  background-color: transparent;
+  color: cyan;
+  font-size: 11px;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+.simple_more_btn:after {
+  content: "";
+  position: relative;
+  top: -1px;
+  width: 10px;
+  height: 10px;
+  display: block;
+  border-left: 2px solid cyan;
+  border-bottom: 2px solid cyan;
+  transform: rotate(-45deg);
+  transition: top 0.1s ease-in;
+  margin: 0 auto;
+}
+
+.simple_more_btn:hover:after {
+  top: 1px;
 }
 
 .introduction {
@@ -69,12 +106,14 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+.contact_details a,
+.timeline a {
+  color: white;
   text-decoration: underline;
-  text-decoration-style: dotted;
 }
 
-.work a {
+.work a,
+.contact_details a {
   padding: 2px 8px;
   line-height: 30px;
   text-decoration: none;
@@ -82,13 +121,14 @@ a:hover {
 
 .work a:hover,
 .read_more,
-.work_teaser a {
+.other_work a,
+.contact_details a:hover {
   background-color: cyan;
   color: #333;
 }
 
 .read_more:hover,
-.work_teaser a:hover {
+.other_work a:hover {
   background-color: #333;
   color: cyan;
 }
@@ -98,6 +138,8 @@ a:hover {
   position: absolute;
   right: 0px;
   bottom: 0px;
+  width: 33px;
+  height: 35px;
 }
 
 .read_less {
@@ -111,7 +153,7 @@ a:hover {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .timeline header h2,
@@ -236,14 +278,6 @@ main > article {
   border: 1px solid #ff00cc;
 }
 
-.contact_detail_value a {
-  line-height: inherit;
-  color: white !important;
-}
-.contact_detail_value a:hover {
-  color: #333 !important;
-}
-
 .work header {
   border-color: #ffcc00;
 }
@@ -300,8 +334,22 @@ main > article {
 }
 
 .work_item .img_container {
+  position: relative;
   height: 300px;
   overflow: hidden;
+}
+
+.work_item .img_container::before {
+  content: "|";
+  position: absolute;
+  z-index: -1;
+  display: inline-block;
+  transform-origin: center center;
+  animation: throbber 0.6s 0.2s infinite linear;
+  font-size: 17px;
+  color: #fc0;
+  left: 50%;
+  top: 50%;
 }
 
 .content img {
@@ -330,23 +378,23 @@ main > article {
   color: #666;
 }
 
-.work_teaser {
+.other_work {
   margin-top: 20px;
   width: 95%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.work_teaser h3 {
+.other_work h3 {
   margin-top: 15px;
   background-color: transparent;
   color: white;
   padding: 0;
 }
 
-.work_teaser p {
+.other_work p {
   background-color: white;
-  color: #999 !important;
+  color: #999;
   margin-top: 5px;
   font-size: 17px;
   border: 0;
@@ -358,9 +406,10 @@ main > article {
 .about .content {
   margin-bottom: 15px;
 }
+
 .timeline header,
 .about header {
-  border-color: #0ff;
+  border-color: cyan;
 }
 
 .timeline_content {
@@ -397,7 +446,7 @@ main > article {
 .timeline_item h3 {
   padding: 10px;
   align-self: center;
-  color: #0ff;
+  color: cyan;
   font-size: 10px;
 }
 
@@ -420,14 +469,14 @@ main > article {
 
 .timeline_content {
   padding: 10px 15px;
-  background-image: linear-gradient(#0ff 33%, rgba(255, 255, 255, 0) 0%);
+  background-image: linear-gradient(cyan 33%, rgba(255, 255, 255, 0) 0%);
   background-position: left;
   background-size: 1px 5px;
   background-repeat: repeat-y;
 }
 
 .timeline_content em {
-  color: #0ff;
+  color: cyan;
   font-size: 11px;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;

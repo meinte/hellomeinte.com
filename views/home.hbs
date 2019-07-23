@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</section>
-	<article class='topic timeline'>
+	<article id='timelines' class='topic timeline' data-num-timelines={{timelines.length}}>
 		<header>
 			<h2>Timeline</h2>
 		</header>
@@ -32,14 +32,15 @@
 			{{{timeline_intro.html}}}
 		</div>
 		{{#each timelines}}
-		<section class='timeline_item'>
+		<section class='timeline_item' id='timeline_{{@key}}'>
 			<h3>{{{timelineTitleEmphasize this.title}}}</h3>
 			<div class='timeline_content'>
 				{{{this.html}}}
-				<em>Keywords: {{{tagList this.tags ", "}}}</em>
+				<em>This year's keywords: {{{tagList this.tags ", "}}}</em>
 			</div>
 		</section>
 		{{/each}}
+		<button class='simple_more_btn' data-ui="show_all_timelines">Show all years</button>
 	</article>
 	<article class='topic work'>
 		<header>
@@ -49,7 +50,7 @@
 			{{{work_intro.html}}}
 		</div>
 		{{#each clients}}
-		<section class='work_item' id='{{this.title}}'>
+		<section class='work_item' id='{{this.slug}}'>
 			<h3>{{{clientTitleEmphasize this.title}}}</h3>
 			<div class='teaser'>
 				<h4>{{this.custom_excerpt}}</h4>
@@ -66,7 +67,7 @@
 			</div>
 		</section>
 		{{/each}}
-		<div class='work_teaser'>
+		<div class='other_work'>
 			{{{other_work.html}}}
 		</div>
 	</article>

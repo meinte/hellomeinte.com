@@ -1,9 +1,31 @@
 function init() {
+  const MAX_TIMELINES = 3;
+
   const mainElement = document.getElementsByTagName("main")[0];
   const read_moreButtons = T.gats(mainElement, "data-ui", "read_more") || [];
   const read_lessButtons = T.gats(mainElement, "data-ui", "read_less") || [];
   const moreContent = T.gats(mainElement, "data-ui", "more_content") || [];
+
   const allAnchors = document.getElementsByTagName("a");
+
+  const moreTimelinesButton = T.gat(
+    mainElement,
+    "data-ui",
+    "show_all_timelines"
+  );
+
+  const timelines = T.gid("timelines");
+  if (!timelines) return;
+  const numTimelines = parseInt(
+    timelines.getAttribute("data-num-timelines"),
+    10
+  );
+
+  moreTimelinesButton.addEventListener("click", () => {
+    T.adcl(moreTimelinesButton, "hidden");
+    showAllTimelines();
+  });
+
   (function hideWorkContent() {
     for (var i = 0; i < moreContent.length; i++) {
       T.adcl(moreContent[i], "hidden");
@@ -38,6 +60,17 @@ function init() {
     }
   })();
 
+  (function hideTooManyTimelines() {
+    if (numTimelines > MAX_TIMELINES) {
+      for (var i = MAX_TIMELINES; i < numTimelines; i++) {
+        const timeline = T.gid(`timeline_${i}`);
+        if (timeline) {
+          T.adcl(timeline, "hidden");
+        }
+      }
+    }
+  })();
+
   function readless_clickHandler(e) {
     const contentIndex = read_lessButtons.indexOf(this);
     T.adcl(moreContent[contentIndex], "hidden");
@@ -51,7 +84,16 @@ function init() {
     e.preventDefault();
   }
 
-  function showWorkContent(contentElement) {
+  const showAllTimelines = () => {
+    for (var i = 0; i < numTimelines; i++) {
+      const timeline = T.gid(`timeline_${i}`);
+      if (timeline) {
+        T.rmcl(timeline, "hidden");
+      }
+    }
+  };
+
+  const showWorkContent = contentElement => {
     const contentIndex = moreContent.indexOf(contentElement);
     const img = contentElement.getElementsByTagName("img")[0];
     const moreButton = read_moreButtons[contentIndex];
@@ -64,7 +106,5 @@ function init() {
     }
 
     T.rmcl(contentElement, "hidden");
-  }
-
-  function hideWorkContent() {}
+  };
 }

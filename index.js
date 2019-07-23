@@ -49,7 +49,7 @@ const WEBSITE_CONTENT_IDS = {
   timeline_intro: "timeline_intro",
   "client:Greenwheels": "greenwheels",
   "client:QGC": "qgc",
-  "client:Macquarie": "macquarie",
+  "client:Macquarie University": "macquarie",
   "client:Deloitte": "deloitte",
   other_work: "other_work",
   about: "about",
@@ -68,7 +68,7 @@ const filterOnGhostTitle = (pages, title) =>
 const grabGhostContent = () => {
   return api.pages
     .browse({
-      fields: "html,title,custom_excerpt,feature_image",
+      fields: "html,slug,title,custom_excerpt,feature_image",
       include: "tags",
       limit: "all",
       filter: "tag:hash-website",
