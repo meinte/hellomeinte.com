@@ -11,10 +11,35 @@
   body {
     z-index: 1;
   }
+
+  a {
+    text-decoration: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    color: inherit !important;
+  }
+
+  button[data-ui="show_all_timelines"],
   .external_link,
   .read_more,
   .read_less,
   .ending {
     display: none;
+  }
+
+  .timeline_item.hidden {
+    display: flex !important;
+  }
+
+  .timeline_item {
+    break-inside: avoid-page;
+  }
+
+  article {
+    break-after: page;
+  }
+
+  article.timeline {
+    break-before: page;
   }
 }

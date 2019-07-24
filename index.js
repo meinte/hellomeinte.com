@@ -59,7 +59,9 @@ const WEBSITE_CONTENT_IDS = {
   "Timeline 2016": "t2016",
   "Timeline 2015": "t2015",
   "Timeline 2014": "t2014",
-  "Timeline 2013": "t2013"
+  "Timeline 2013": "t2013",
+  "Timeline 2012": "t2012",
+  "Timeline 2011": "t2011"
 };
 
 const filterOnGhostTitle = (pages, title) =>

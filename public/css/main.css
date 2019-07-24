@@ -78,23 +78,22 @@ button {
 .introduction {
   margin-bottom: 10px;
 }
-.introduction h1,
-.introduction p {
+.introduction h1 {
   background-color: white;
-  padding: 12px;
+  padding: 6px;
   text-transform: uppercase;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  font-size: 23px;
+  font-size: 22px;
   color: #666;
+  text-align: justify;
 }
 
 .introduction em {
   background-color: #ccc;
   padding-left: 5px;
   padding-right: 5px;
-  display: inline-block;
-  height: 30px;
+  margin: 1px -3px;
 }
 
 em {
@@ -114,7 +113,8 @@ a {
 
 .work a,
 .contact_details a {
-  padding: 2px 8px;
+  padding: 2px 6px;
+  margin: 0 -2px;
   line-height: 30px;
   text-decoration: none;
 }
@@ -220,9 +220,11 @@ main > article {
   position: relative;
 }
 
-.work_item .content {
-  border: solid #4e4e4e 1px;
-  color: white;
+.work_item .inner_content {
+  border: 1px solid;
+  border-image-source: linear-gradient(0deg, #3e3e3e, #222);
+  border-image-slice: 1;
+  border-top: 0;
 }
 
 .topic header h2 {
@@ -266,7 +268,7 @@ main > article {
 }
 
 .contact_detail_header {
-  padding: 7px 10px;
+  padding: 10px;
   flex-basis: 30%;
   background-color: #ff00cc;
 }
@@ -323,10 +325,7 @@ main > article {
 .work_item {
   margin-top: 25px;
   position: relative;
-}
-
-.work_item .content {
-  border-top: 0;
+  box-shadow: 0px 7px 7px -6px rgba(0, 0, 0, 0.6);
 }
 
 .content p {
@@ -371,7 +370,7 @@ main > article {
 
 .work_item .teaser {
   background-color: white;
-  padding: 5px 2px 5px 10px;
+  padding: 5px 5px 5px 10px;
 }
 
 .work_item .teaser h4 {

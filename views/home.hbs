@@ -40,7 +40,7 @@
 			</div>
 		</section>
 		{{/each}}
-		<button class='simple_more_btn' data-ui="show_all_timelines">Show all years</button>
+		<button class='simple_more_btn' data-ui="show_all_timelines">Show More Years</button>
 	</article>
 	<article class='topic work'>
 		<header>
@@ -62,7 +62,9 @@
 					<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 						data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
 				</div>
-				{{{this.html}}}
+				<div class='inner_content'>
+					{{{this.html}}}
+				</div>
 				<button class='read_less' data-ui='read_less'>-</button>
 			</div>
 		</section>
