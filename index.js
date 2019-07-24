@@ -108,7 +108,14 @@ const bundleContent = (content, withTitle) =>
     return arr;
   }, []);
 
+//hard caching of content, never invalidates unless service is restarted.
+let cachedContent = null;
 app.get("/", function(req, res) {
+  if (cachedContent) {
+    debug("using cached content");
+    res.render("home", cachedContent);
+    return;
+  }
   const start = new Date();
 
   grabGhostContent()
@@ -120,6 +127,7 @@ app.get("/", function(req, res) {
     .then(content => {
       debug("mapped content: ", content);
       debug("request duration ", new Date() - start);
+      cachedContent = content;
       res.render("home", content);
     })
     .catch(err => {
