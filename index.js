@@ -8,7 +8,7 @@ const app = express();
 const exphbs = require("express-handlebars");
 
 const apiKey = process.env.GHOST_API_KEY;
-const port = process.env.PORT;
+const port = process.env.WWWPORT;
 
 debug("starting..");
 
