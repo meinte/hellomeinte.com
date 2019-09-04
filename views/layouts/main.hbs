@@ -7,8 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="thumbnail" content="https://hellomeinte.com/img/logo.png" />
   <meta name=viewport content="width=device-width, initial-scale=1">
-  <meta name="description"
-    content="HelloMeinte.com is the website of Meinte van't Kruis. I have been Developing, Leading and Conceptualizing digital solutions for a wide variety of clients. I have worked in a variety of roles and have done everything from full-stack development to managing projects as well as wireframing designs, I enjoy being involved in the full scope of a project. Contact me if you want to work together!">
+  <meta name="description" content="{{pagedescription.custom_excerpt}}">
   <meta name="google-site-verification" content="BKMtunXXfr6CKrH-vsGFGSrWqmpbfNusrH3s1iLHEGw" />
   <!-- opengraph -->
   <meta prefix="og: https://ogp.me/ns#" property="og:title" content="helloMeinte.com" />
@@ -18,8 +17,7 @@
   <meta prefix="og: https://ogp.me/ns#" property="og:image:type" content="image/png">
   <meta prefix="og: https://ogp.me/ns#" property="og:image:width" content="1200">
   <meta prefix="og: https://ogp.me/ns#" property="og:image:height" content="1200">
-  <meta prefix="og: https://ogp.me/ns#" property="og:description"
-    content="HelloMeinte.com is the website of Meinte van't Kruis. I have been Developing, Leading and Conceptualizing digital solutions for a wide variety of clients. I have worked in a variety of roles and have done everything from full-stack development to managing projects as well as wireframing designs, I enjoy being involved in the full scope of a project. Contact me if you want to work together!" />
+  <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{{pagedescription.custom_excerpt}}}" />
   <!-- fav -->
   <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png">
@@ -41,16 +39,19 @@
   <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
   <meta name="theme-color" content="#333333">
   <!-- styles -->
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/print.css" media="print">
   <!-- javascript -->
-  <script src='js/tools.js' defer></script>
-  <script src='js/main.js' defer></script>
+  <script src='/js/tools.js' defer></script>
+  <script src='/js/main.js' defer></script>
 </head>
 
 <body onload='init()'>
   {{{body}}}
+  <footer>
+    <p>Copyright © hellomeinte.com 2013-2019</p>
+  </footer>
 </body>
 
 </html>

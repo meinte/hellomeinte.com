@@ -6,28 +6,14 @@ const handleBars = require("handlebars");
 const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars");
+const ghostUtils = require("./ghost-utils");
+const hbsHelpers = require("./handlebars-helpers");
 
 const apiKey = process.env.GHOST_API_KEY;
 const port = process.env.WWWPORT;
+const isProduction = process.env.NODE_ENV === "production";
 
 debug("starting..");
-
-handleBars.registerHelper("clientTitleEmphasize", clientTitle => {
-  const split = clientTitle.split(":");
-  return `${split[0]}: <em>${split[1]}</em>`;
-});
-handleBars.registerHelper("timelineTitleEmphasize", clientTitle => {
-  const year = clientTitle.split("Timeline ")[1];
-  const splitYear = year.split("20");
-  return `20<em>${splitYear[1]}</em>`;
-});
-
-handleBars.registerHelper("tagList", (tags, delimiter) =>
-  tags
-    .filter(tag => tag.visibility === "public")
-    .map(tag => tag.name)
-    .join(delimiter)
-);
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
@@ -39,9 +25,12 @@ const api = new GhostContentAPI({
   version: "v2"
 });
 
+hbsHelpers(handleBars);
+
 //Maps ghost page titles to handlebars IDs
 //Pages not listed here will not be shown on the website
 const WEBSITE_CONTENT_IDS = {
+  pagedescription: "pagedescription",
   main_intro: "main_intro",
   intro1: "intro1",
   contact_intro: "contact_intro",
@@ -64,64 +53,21 @@ const WEBSITE_CONTENT_IDS = {
   "Timeline 2011": "t2011"
 };
 
-const filterOnGhostTitle = (pages, title) =>
-  pages.find(page => page.title === title);
-
-const grabGhostContent = () => {
-  return api.pages
-    .browse({
-      fields: "html,slug,title,custom_excerpt,feature_image",
-      include: "tags",
-      limit: "all",
-      filter: "tag:hash-website",
-      order: "title ASC"
-    })
-    .then(pages => {
-      debug(pages);
-      /**
-       * Search content through their page titles.
-       * In this case, titles are stored in the WEBSITE_CONTENT_IDS array.
-       * Content is then mapped(reduced) in an object through its title
-       */
-      return Object.keys(WEBSITE_CONTENT_IDS).reduce((acc, title) => {
-        const ghostContent = filterOnGhostTitle(pages, title) || {};
-        return {
-          ...acc,
-          [WEBSITE_CONTENT_IDS[title]]: ghostContent
-        };
-      }, {});
-    })
-    .catch(err => {
-      throw err; //main render function will deal with this
-    });
-};
-
-const bundleContent = (content, withTitle) =>
-  Object.keys(content).reduce((acc, itemKey) => {
-    const item = content[itemKey];
-    const arr = [...acc];
-    if (!item.title) return arr;
-    if (item.title.indexOf(withTitle) > -1) {
-      arr.push(item);
-      delete content[itemKey];
-    }
-    return arr;
-  }, []);
-
 //hard caching of content, never invalidates unless service is restarted.
 let cachedContent = null;
 app.get("/", function(req, res) {
-  if (cachedContent) {
+  if (cachedContent && isProduction) {
     debug("using cached content");
     res.render("home", cachedContent);
     return;
   }
   const start = new Date();
 
-  grabGhostContent()
+  ghostUtils
+    .grabGhostContent(api, WEBSITE_CONTENT_IDS)
     .then(content => {
-      content.clients = bundleContent(content, "client");
-      content.timelines = bundleContent(content, "Timeline");
+      content.clients = ghostUtils.bundleContent(content, "client");
+      content.timelines = ghostUtils.bundleContent(content, "Timeline");
       return content;
     })
     .then(content => {
@@ -137,4 +83,9 @@ app.get("/", function(req, res) {
       });
     });
 });
+
+app.get("/projects/vfrg", function(req, res) {
+  res.render("project", {});
+});
+
 app.listen(port, () => debug(`Listening on port ${port}!`));

@@ -42,4 +42,8 @@
   article.timeline {
     break-before: page;
   }
+
+  .other_work {
+    display: none;
+  }
 }

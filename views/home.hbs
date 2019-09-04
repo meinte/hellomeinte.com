@@ -1,88 +1,75 @@
-<main>
-	<img src='img/logo.png' alt='HelloMeinte logo' />
-	<section class='introduction'>
-		{{{intro1.html}}}
-	</section>
-	<div class='top_text'>{{{main_intro.html}}}</div>
-	<section class='topic contact'>
-		<header>
-			<h2>Contact</h2>
-		</header>
-		<div class='top_text'>{{{contact_intro.html}}}</div>
-		<div class='contact_details'>
-			<div>
-				<p class='contact_detail_header'>Email</p>
-				<p class='contact_detail_value'><a href='mailto:meinte@gmail.com'>meinte@gmail.com</a></p>
-			</div>
-			<div>
-				<p class='contact_detail_header'>Phone</p>
-				<p class='contact_detail_value'><a href="tel:0061457283421">0061 457283421</a></p>
-			</div>
-			<div class='last'>
-				<p class='contact_detail_header'>Skype</p>
-				<p class='contact_detail_value'><a href="skype:meinte.vant.kruis?call">meinte.vant.kruis</a></p>
-			</div>
-		</div>
-	</section>
-	<article id='timelines' class='topic timeline' data-num-timelines={{timelines.length}}>
-		<header>
-			<h2>Timeline</h2>
-		</header>
-		<div class='top_text'>
-			{{{timeline_intro.html}}}
-		</div>
-		{{#each timelines}}
-		<section class='timeline_item' id='timeline_{{@key}}'>
-			<h3>{{{timelineTitleEmphasize this.title}}}</h3>
-			<div class='timeline_content'>
-				{{{this.html}}}
-				<em>This year's keywords: {{{tagList this.tags ", "}}}</em>
-			</div>
+<main class='home'>
+	<header>
+		<img src='/img/logo.svg' alt='HelloMeinte logo' class='main-logo' />
+	</header>
+	<article>
+		<section class='introduction'>
+			{{{intro1.html}}}
 		</section>
-		{{/each}}
-		<button class='simple_more_btn' data-ui="show_all_timelines">Show More Years</button>
-	</article>
-	<article class='topic work'>
-		<header>
-			<h2>Projects</h2>
-		</header>
-		<div class='top_text'>
-			{{{work_intro.html}}}
-		</div>
-		{{#each clients}}
-		<section class='work_item' id='{{this.slug}}'>
-			<h3>{{{clientTitleEmphasize this.title}}}</h3>
-			<div class='teaser'>
-				<h4>{{this.custom_excerpt}}</h4>
-				<p class='roles'>{{{tagList this.tags " | "}}}</p>
-				<button class='read_more' data-ui='read_more'>+</button>
+		<div class='main-introduction'>{{{main_intro.html}}}</div>
+		<section class='topic contact'>
+			<header>
+				<h2>Contact</h2>
+			</header>
+			<div class='section-introduction'>{{{contact_intro.html}}}</div>
+			{{>contact-details}}
+		</section>
+		<section id='timelines' class='topic timeline' data-num-timelines={{timelines.length}}>
+			<header>
+				<h2>Timeline</h2>
+			</header>
+			<div class='section-introduction'>
+				{{{timeline_intro.html}}}
 			</div>
-			<div class='content' data-ui='more_content'>
-				<div class='img_container'>
-					<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-						data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
-				</div>
-				<div class='inner_content'>
+			{{#each timelines}}
+			<section class='timeline-item' id='timeline-{{@key}}'>
+				<h3>{{{timelineTitleEmphasize this.title}}}</h3>
+				<div class='timeline-content'>
 					{{{this.html}}}
+					<em>This year's keywords: {{{tagList this.tags ", "}}}</em>
 				</div>
-				<button class='read_less' data-ui='read_less'>-</button>
+			</section>
+			{{/each}}
+			<button class='simple-more-btn' data-ui="show-all-timelines">Show More Years</button>
+		</section>
+		<section class='topic work'>
+			<header>
+				<h2>Projects</h2>
+			</header>
+			<div class='section-introduction'>
+				{{{work_intro.html}}}
+			</div>
+			{{#each clients}}
+			<section class='work-item' id='{{this.slug}}'>
+				<h3>{{{clientTitleEmphasize this.title}}}</h3>
+				<div class='teaser'>
+					<h4>{{this.custom_excerpt}}</h4>
+					<p class='roles'>{{{tagList this.tags " | "}}}</p>
+					<button class='read-more' data-ui='read-more'>+</button>
+				</div>
+				<div class='content' data-ui='more-content'>
+					<div class='img-container'>
+						<img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+							data-src='{{this.feature_image}}' alt='Screenshot of {{this.title}}' />
+					</div>
+					<div class='inner-content'>
+						{{{this.html}}}
+					</div>
+					<button class='read-less' data-ui='read-less'>-</button>
+				</div>
+			</section>
+			{{/each}}
+			<div class='other-work'>
+				{{{other-work.html}}}
 			</div>
 		</section>
-		{{/each}}
-		<div class='other_work'>
-			{{{other_work.html}}}
-		</div>
-	</article>
-	<article class='topic about'>
-		<header>
-			<h2>About</h2>
-		</header>
-		<div class='content'>
-			{{{about.html}}}
-		</div>
-		<p class='ending'>Want to know more?</p>
-		<p class='ending'>Perhaps I started my <a href='https://blog.hellomeinte.com/' target='_blank'>blog</a>. And you
-			can
-			always visit my <a href='https://au.linkedin.com/in/meinte' target='_blank'>LinkedIn profile</a>.</p>
+		<section class='topic about'>
+			<header>
+				<h2>About</h2>
+			</header>
+			<div class='content'>
+				{{{about.html}}}
+			</div>
+		</section>
 	</article>
 </main>

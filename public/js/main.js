@@ -2,16 +2,16 @@ function init() {
   const MAX_TIMELINES = 3;
 
   const mainElement = document.getElementsByTagName("main")[0];
-  const read_moreButtons = T.gats(mainElement, "data-ui", "read_more") || [];
-  const read_lessButtons = T.gats(mainElement, "data-ui", "read_less") || [];
-  const moreContent = T.gats(mainElement, "data-ui", "more_content") || [];
+  const read_moreButtons = T.gats(mainElement, "data-ui", "read-more") || [];
+  const read_lessButtons = T.gats(mainElement, "data-ui", "read-less") || [];
+  const moreContent = T.gats(mainElement, "data-ui", "more-content") || [];
 
   const allAnchors = document.getElementsByTagName("a");
 
   const moreTimelinesButton = T.gat(
     mainElement,
     "data-ui",
-    "show_all_timelines"
+    "show-all-timelines"
   );
 
   const timelines = T.gid("timelines");
@@ -22,13 +22,13 @@ function init() {
   );
 
   moreTimelinesButton.addEventListener("click", () => {
-    T.adcl(moreTimelinesButton, "hidden");
+    moreTimelinesButton.classList.add("hidden");
     showAllTimelines();
   });
 
   (function hideWorkContent() {
     for (var i = 0; i < moreContent.length; i++) {
-      T.adcl(moreContent[i], "hidden");
+      moreContent[i].classList.add("hidden");
     }
   })();
   (function addButtonsBehaviour() {
@@ -63,9 +63,9 @@ function init() {
   (function hideTooManyTimelines() {
     if (numTimelines > MAX_TIMELINES) {
       for (var i = MAX_TIMELINES; i < numTimelines; i++) {
-        const timeline = T.gid(`timeline_${i}`);
+        const timeline = T.gid(`timeline-${i}`);
         if (timeline) {
-          T.adcl(timeline, "hidden");
+          timeline.classList.add("hidden");
         }
       }
     }
@@ -73,8 +73,8 @@ function init() {
 
   function readless_clickHandler(e) {
     const contentIndex = read_lessButtons.indexOf(this);
-    T.adcl(moreContent[contentIndex], "hidden");
-    T.rmcl(read_moreButtons[contentIndex], "hidden");
+    moreContent[contentIndex].classList.add("hidden");
+    read_moreButtons[contentIndex].classList.remove("hidden");
     e.preventDefault();
   }
 
@@ -86,9 +86,9 @@ function init() {
 
   const showAllTimelines = () => {
     for (var i = 0; i < numTimelines; i++) {
-      const timeline = T.gid(`timeline_${i}`);
+      const timeline = T.gid(`timeline-${i}`);
       if (timeline) {
-        T.rmcl(timeline, "hidden");
+        timeline.classList.remove("hidden");
       }
     }
   };
@@ -102,9 +102,8 @@ function init() {
       img.src = img.getAttribute("data-src");
     }
     if (moreButton) {
-      T.adcl(moreButton, "hidden");
+      moreButton.classList.add("hidden");
     }
-
-    T.rmcl(contentElement, "hidden");
+    contentElement.classList.remove("hidden");
   };
 }
