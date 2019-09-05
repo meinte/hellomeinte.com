@@ -72,6 +72,12 @@ app.get("/", function(req, res) {
 
 app.get("/projects/*", function(req, res) {
   const projectId = req.url.split("/projects/")[1];
+  if (cachedContent[projectId] && IS_PRODUCTION) {
+    debug("using cached content");
+    res.render("project", cachedContent[projectId]);
+    return;
+  }
+
   if (!projectId.length) {
     return projectNotFound(res);
   }
@@ -82,6 +88,7 @@ app.get("/projects/*", function(req, res) {
       if (!page || !page.html) {
         throw new Error(`Project not found with ID: ${projectId}`);
       }
+      cachedContent[projectId] = page;
       res.render("project", page);
     })
     .catch(err => generalError(err, res));
