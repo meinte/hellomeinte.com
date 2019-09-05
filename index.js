@@ -1,70 +1,61 @@
 require("dotenv").config();
 const debug = require("debug")("hellomeinte:main");
 const error = require("debug")("hellomeinte:error");
+
 const GhostContentAPI = require("@tryghost/content-api");
 const handleBars = require("handlebars");
 const express = require("express");
-const app = express();
 const exphbs = require("express-handlebars");
+
 const ghostUtils = require("./ghost-utils");
 const hbsHelpers = require("./handlebars-helpers");
+const portfolioContentIds = require("./config/portfolio-content-ids.json");
 
-const apiKey = process.env.GHOST_API_KEY;
-const port = process.env.WWWPORT;
-const isProduction = process.env.NODE_ENV === "production";
+const API_KEY = process.env.GHOST_API_KEY;
+const PORT = process.env.WWWPORT;
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 debug("starting..");
-
+const app = express();
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
+hbsHelpers(handleBars);
+
 const api = new GhostContentAPI({
   url: "https://blog.hellomeinte.com",
-  key: apiKey,
+  key: API_KEY,
   version: "v2"
 });
 
-hbsHelpers(handleBars);
+const projectNotFound = res => {
+  res.status(400);
+  res.render("error", {
+    error_msg: "Bad request, please provide a valid project URL..."
+  });
+};
 
-//Maps ghost page titles to handlebars IDs
-//Pages not listed here will not be shown on the website
-const WEBSITE_CONTENT_IDS = {
-  pagedescription: "pagedescription",
-  main_intro: "main_intro",
-  intro1: "intro1",
-  contact_intro: "contact_intro",
-  work_intro: "work_intro",
-  timeline_intro: "timeline_intro",
-  "client:Greenwheels": "greenwheels",
-  "client:QGC": "qgc",
-  "client:Macquarie University": "macquarie",
-  "client:Deloitte": "deloitte",
-  other_work: "other_work",
-  about: "about",
-  "Timeline 2019": "t2019",
-  "Timeline 2018": "t2018",
-  "Timeline 2017": "t2017",
-  "Timeline 2016": "t2016",
-  "Timeline 2015": "t2015",
-  "Timeline 2014": "t2014",
-  "Timeline 2013": "t2013",
-  "Timeline 2012": "t2012",
-  "Timeline 2011": "t2011"
+const generalError = (err, res) => {
+  error(err);
+  res.status(500);
+  res.render("error", {
+    error_msg: "Something went wrong, please try again later..."
+  });
 };
 
 //hard caching of content, never invalidates unless service is restarted.
-let cachedContent = null;
+let cachedContent = {};
 app.get("/", function(req, res) {
-  if (cachedContent && isProduction) {
+  if (cachedContent["root"] && IS_PRODUCTION) {
     debug("using cached content");
-    res.render("home", cachedContent);
+    res.render("home", cachedContent["root"]);
     return;
   }
   const start = new Date();
 
   ghostUtils
-    .grabGhostContent(api, WEBSITE_CONTENT_IDS)
+    .grabPortfolio(api, portfolioContentIds)
     .then(content => {
       content.clients = ghostUtils.bundleContent(content, "client");
       content.timelines = ghostUtils.bundleContent(content, "Timeline");
@@ -73,19 +64,24 @@ app.get("/", function(req, res) {
     .then(content => {
       debug("mapped content: ", content);
       debug("request duration ", new Date() - start);
-      cachedContent = content;
+      cachedContent["root"] = content;
       res.render("home", content);
     })
-    .catch(err => {
-      error(err);
-      res.render("error", {
-        error_msg: "Something went wrong, please try again later..."
-      });
-    });
+    .catch(err => generalError(err, res));
 });
 
 app.get("/projects/vfrg", function(req, res) {
-  res.render("project", {});
+  const projectId = req.url.split("/projects/")[1];
+  if (!projectId.length) {
+    return projectNotFound(res);
+  }
+
+  ghostUtils
+    .grabProject(api, projectId)
+    .then(page => {
+      res.render("project", page);
+    })
+    .catch(err => generalError(err, res));
 });
 
-app.listen(port, () => debug(`Listening on port ${port}!`));
+app.listen(PORT, () => debug(`Listening on port ${PORT}!`));

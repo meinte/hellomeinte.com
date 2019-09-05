@@ -3,7 +3,23 @@ const debug = require("debug")("hellomeinte:ghost-utils");
 const filterOnGhostTitle = (pages, title) =>
   pages.find(page => page.title === title);
 
-const grabGhostContent = (api, contentIds) => {
+const grabProject = (api, project) => {
+  debug(`grabbing project: tag:hash-project-${project}`);
+  return api.pages
+    .browse({
+      fields: "html,title",
+      limit: "1",
+      filter: `tag:hash-project-${project}`
+    })
+    .then(pages => {
+      return pages[0];
+    })
+    .catch(err => {
+      throw err; //main render function will deal with this
+    });
+};
+
+const grabPortfolio = (api, contentIds) => {
   return api.pages
     .browse({
       fields: "html,slug,title,custom_excerpt,feature_image",
@@ -46,6 +62,7 @@ const bundleContent = (content, withTitle) =>
   }, []);
 
 module.exports = {
-  grabGhostContent,
+  grabProject,
+  grabPortfolio,
   bundleContent
 };

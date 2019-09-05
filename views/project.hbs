@@ -5,31 +5,7 @@
     </a>
   </header>
   <article>
-    <h1>VFRG PDF Scraper</h1>
-    <div class='section-introduction'>
-      <p>The CASA organisation used to publish the VFR(visual flight rules) Guide to a PDF format which could be
-        downloaded. Unfortunately, the guide is only accesible through the online web site, https://vfrg.casa.gov.au, no
-        PDFs are supplied anymore, making it impossible to access the guide whilst being offline.
-      </p>
-      <p>
-        To solve this issue, I have written a scraper which uses puppeteer to scrape that web site and generate single
-        PDF files from each page. The package npm-pdftk then combines all these pdfs into a single one with bookmarks
-        which reflect the original structure from CASA.
-      </p>
-      <p>
-        The code itself can be found on github, and run locally, or the generated PDF can be downloaded directly.
-      </p>
-      <p><a class='padded-link' href='http://www.github.com/'>Github repository</a></p>
-      <p><a class='padded-link' href="http://www.google.com">VFRG PDF</a><small> (generated
-          03-10-2018)</small></p>
-
-    </div>
-    <section class='topic contact'>
-      <header>
-        <h2>Contact</h2>
-      </header>
-      <div class='section-introduction'>{{{contact_intro.html}}}</div>
-      {{>contact-details}}
-    </section>
+    <h1>{{title}}</h1>
+    {{{html}}}
   </article>
 </main>

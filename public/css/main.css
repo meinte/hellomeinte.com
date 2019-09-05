@@ -32,18 +32,18 @@
 :root {
   --base-width: calc(450rem / 16);
   --topicheader-width: calc(82rem / 16);
-  --w6: calc(6rem / 16);
-  --w8: calc(8rem / 16);
-  --w10: calc(10rem / 16);
-  --w12: calc(12rem / 16);
-  --w14: calc(14rem / 16);
-  --w16: calc(16rem / 16);
-  --w18: calc(18rem / 16);
-  --w20: calc(20rem / 16);
-  --w24: calc(24rem / 16);
-  --w32: calc(32rem / 16);
-  --w40: calc(40rem / 16);
-  --w50: calc(50rem / 16);
+  --w6: calc(6em / 16);
+  --w8: calc(8em / 16);
+  --w10: calc(10em / 16);
+  --w12: calc(12em / 16);
+  --w14: calc(14em / 16);
+  --w16: calc(16em / 16);
+  --w18: calc(18em / 16);
+  --w20: calc(20em / 16);
+  --w24: calc(24em / 16);
+  --w32: calc(32em / 16);
+  --w40: calc(40em / 16);
+  --w50: calc(50em / 16);
 }
 
 html {
@@ -82,6 +82,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  font-size: var(--w18);
+}
+
 .hidden {
   display: none !important;
 }
@@ -91,11 +95,40 @@ header h2 {
 }
 
 h3 {
-  font-size: var(--w24);
+  font-size: var(--w18);
+}
+
+h4 {
+  font-size: var(--w16);
 }
 
 article > .topic:not(.contact) {
   margin-top: var(--w24);
+}
+
+.project article p::first-letter {
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+
+.project .padded-link {
+  text-transform: uppercase;
+  font-size: var(--w14);
+  white-space: pre-line;
+}
+
+.project .padded-link:hover {
+  color: black;
+}
+
+.project em {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.project article p,
+.section-introduction p:not(:last-of-type) {
+  margin-bottom: var(--w16);
 }
 
 .project h1 {
@@ -103,8 +136,6 @@ article > .topic:not(.contact) {
   font-weight: 300;
   font-size: var(--w32);
   line-height: var(--w40);
-  color: #ffcc00;
-  margin-bottom: var(--w10);
 }
 
 .introduction {
@@ -120,13 +151,13 @@ article > .topic:not(.contact) {
   font-size: var(--w20);
   color: #666;
   font-style: normal;
+  text-align: justify;
 }
 
 .introduction em {
   background-color: #555;
-  padding-left: var(--w6);
-  padding-right: var(--w6);
-  margin: 1px -3px;
+  padding-left: var(--w8);
+  padding-right: var(--w8);
   color: white;
 }
 
@@ -241,6 +272,8 @@ article > .topic:not(.contact) {
   transform-origin: top;
   transform: skewX(-10deg);
 }
+
+.error-message,
 .section-introduction,
 .main-introduction,
 .content p {
@@ -268,15 +301,11 @@ article > .topic:not(.contact) {
 
 .contact header h2 {
   background-color: #ff00cc;
-  color: white;
+  color: #111;
 }
 
 .contact header h2::before {
   background-color: #ff00cc;
-}
-
-.section-introduction p:not(:last-of-type) {
-  margin-bottom: var(--w16);
 }
 
 .contact-details {
@@ -302,6 +331,7 @@ article > .topic:not(.contact) {
   padding: var(--w10);
   flex-basis: 30%;
   background-color: #ff00cc;
+  color: #111;
 }
 .contact-detail-value {
   padding: var(--w6) var(--w10);
@@ -325,7 +355,6 @@ article > .topic:not(.contact) {
   background-color: #ffcc00;
   width: 100%;
   color: #333;
-  height: var(--w50);
 
   overflow: hidden;
   white-space: nowrap;
@@ -339,7 +368,7 @@ article > .topic:not(.contact) {
 .work-item h3::before {
   background-color: #ffcc00;
   content: "";
-  height: var(--w50);
+  height: var(--w40);
   width: var(--w12);
   position: absolute;
   top: 0;
@@ -361,18 +390,23 @@ article > .topic:not(.contact) {
 
 .small-logo {
   position: absolute;
+  height: calc(50em / 16);
   top: 0;
   right: 0;
 }
 
 .main-logo {
-  width: calc(200rem / 16);
+  width: calc(200em / 16);
 }
 
 .work-item .img-container {
   position: relative;
   height: 300px;
   overflow: hidden;
+}
+
+.work-item .img-container img {
+  width: 100%;
 }
 
 .work-item .img-container::before {
@@ -395,7 +429,7 @@ article > .topic:not(.contact) {
 
 .work-item .roles {
   text-transform: uppercase;
-  font-size: var (--w16);
+  font-size: var(--w16);
   color: #444;
   margin-top: var(--w12);
   width: 88%;
@@ -485,7 +519,7 @@ article > .topic:not(.contact) {
 }
 
 .timeline-item p {
-  font-size: 1em;
+  font-size: var(--w16);
   margin-bottom: var(--w16);
 }
 
@@ -515,7 +549,7 @@ article > .topic:not(.contact) {
 }
 
 footer {
-  margin-top: var(--w10);
+  margin: var(--w10) auto;
   border-top: 1px solid #4e4e4e;
   padding: var(--w10) 0;
 }
@@ -529,9 +563,9 @@ footer a {
   font-size: var(--w16);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   html {
-    font-size: 1.7vw;
+    font-size: 1.3vw;
   }
 }
 
@@ -546,7 +580,7 @@ footer a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 450px) {
   .work-item h3::before {
     display: none;
   }
@@ -554,5 +588,9 @@ footer a {
   main {
     width: 100%;
     padding: 0 var(--w10) 0 var(--w10);
+  }
+
+  footer {
+    width: 95%;
   }
 }
