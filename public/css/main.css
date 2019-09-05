@@ -152,6 +152,8 @@ article > .topic:not(.contact) {
   color: #666;
   font-style: normal;
   text-align: justify;
+  word-break: break-all;
+  line-height: 1.4em;
 }
 
 .introduction em {
@@ -223,6 +225,7 @@ article > .topic:not(.contact) {
   position: absolute;
   right: 0px;
   bottom: 0px;
+  text-align: center;
   width: var(--w32);
   height: var(--w32);
 }
@@ -405,7 +408,7 @@ article > .topic:not(.contact) {
 }
 
 .work-item .img-container img {
-  width: 100%;
+  object-fit: cover;
 }
 
 .work-item .img-container::before {
