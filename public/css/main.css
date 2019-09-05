@@ -301,7 +301,7 @@ article > .topic:not(.contact) {
 
 .contact header h2 {
   background-color: #ff00cc;
-  color: #111;
+  color: white;
 }
 
 .contact header h2::before {
@@ -331,7 +331,6 @@ article > .topic:not(.contact) {
   padding: var(--w10);
   flex-basis: 30%;
   background-color: #ff00cc;
-  color: #111;
 }
 .contact-detail-value {
   padding: var(--w6) var(--w10);

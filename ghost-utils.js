@@ -12,6 +12,7 @@ const grabProject = (api, project) => {
       filter: `tag:hash-project-${project}`
     })
     .then(pages => {
+      if (!pages.length) return null;
       return pages[0];
     })
     .catch(err => {

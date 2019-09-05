@@ -40,7 +40,7 @@ const generalError = (err, res) => {
   error(err);
   res.status(500);
   res.render("error", {
-    error_msg: "Something went wrong, please try again later..."
+    error_msg: `<p>Something went wrong...</p><p>${err.message}</p>`
   });
 };
 
@@ -70,7 +70,7 @@ app.get("/", function(req, res) {
     .catch(err => generalError(err, res));
 });
 
-app.get("/projects/vfrg", function(req, res) {
+app.get("/projects/*", function(req, res) {
   const projectId = req.url.split("/projects/")[1];
   if (!projectId.length) {
     return projectNotFound(res);
@@ -79,6 +79,9 @@ app.get("/projects/vfrg", function(req, res) {
   ghostUtils
     .grabProject(api, projectId)
     .then(page => {
+      if (!page || !page.html) {
+        throw new Error(`Project not found with ID: ${projectId}`);
+      }
       res.render("project", page);
     })
     .catch(err => generalError(err, res));
